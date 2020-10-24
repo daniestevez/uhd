@@ -1301,6 +1301,28 @@ public:
         }
     }
 
+//////////////
+/*
+* 
+* 
+* 
+    virtual void set_rx_lo_dist(
+        bool enabled, size_t chan = 0) = 0;
+    get_device()->get_tree()->access<bool>("mboards/0/dboards/A/rx_frontends/0/los/lo1/lo_distribution/LO_OUT_<output_number>/export").set(<output_enabled>)
+    get_device()->get_tree()->access<bool>("mboards/0/dboards/A/rx_frontends/0/los/lo1/lo_distribution/LO_OUT_0/export").set(true)
+    get_device()->get_tree()->access<bool>("mboards/0/dboards/A/rx_frontends/0/los/lo1/lo_distribution/LO_OUT_1/export").set(true)
+
+ */
+
+    void set_rx_lo_dist(bool enabled, const std::string &name){
+               //_tree->access<bool>(rx_rf_fe_root(chan) / "los" / name / "export").set(enabled);
+               _tree->access<bool>("mboards/0/dboards/A/rx_frontends/0/los/lo1/lo_distribution" / name / "export").set(enabled);
+    }
+
+
+
+///////////////
+
     bool get_rx_lo_export_enabled(const std::string& name = ALL_LOS, size_t chan = 0)
     {
         if (_tree->exists(rx_rf_fe_root(chan) / "los")) {
